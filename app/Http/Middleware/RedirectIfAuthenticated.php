@@ -23,8 +23,15 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                if (Auth::user()->role_id == 1){
+                $role_id = Auth::user()->role_id;
+                if ($role_id == 1 || $role_id == 3){
                     return redirect("/admin");
+                }
+                if ($role_id == 4){
+                    return redirect()->route("techSupportHome");
+                }
+                if ($role_id == 5){
+                    return redirect()->route("techSupportEmployeeHome");
                 }
                 else{
                     return redirect("/employee/home");

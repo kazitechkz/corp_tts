@@ -40,6 +40,21 @@
                                 >
                             </div>
                         </div>
+                        <div class="col-span-12 md:col-span-4 flex items-center">
+                            <!-- Фильтр даты создания заявки -->
+                                <div class="m-0 p-0">
+                                    <input
+                                        wire:model="exclude_ended"
+                                        type="checkbox"
+                                        id="checkbox"
+                                        class="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-500 checked:bg-blue-600 checked:border-transparent"
+                                    >
+                                    <label for="checkbox" class="ml-2 text-sm font-medium text-gray-900">
+                                        Убрать завершенные
+                                    </label>
+                                </div>
+
+                        </div>
 
 
 

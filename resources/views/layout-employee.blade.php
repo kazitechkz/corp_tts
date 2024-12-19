@@ -51,8 +51,17 @@
 <!-- Begin page -->
 <div id="layout-wrapper" class="min-vh-100">
     <!-- ============================================================== -->
-    <div class="container mx-auto">
+    <div class="container mx-auto relative">
         @yield('content')
+        <div class="fixed bottom-5 right-5">
+            <a href="{{route("employee-notifications")}}">
+            <button class="relative bg-[#ffa41c] text-white p-4 rounded-full shadow-lg hover:bg-[#ffa41c] focus:outline-none focus:ring-2 focus:ring-orange-300">
+                💬 <small>{{\App\Models\Notification::where(["user_id"=>auth()->id(),"seen" => false])->count()}}</small>
+                <span class="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full animate-ping"></span>
+            </button>
+            </a>
+        </div>
+
     </div>
 
 </div>

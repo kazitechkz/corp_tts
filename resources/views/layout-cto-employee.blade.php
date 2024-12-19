@@ -50,7 +50,7 @@
                     </div>
                     <div class="w-1/2">
                         <div class="text-right">
-                            <a href="{{route('techSupportEmployeeHome')}}">
+                            <a href="{{route('cto-employee-profile')}}">
                                 <button class="btn header-item waves-effect d-inline text-center">
                                     <div class="flex justify-content-center">
                                         <img class="rounded-circle header-profile-user" src="{{Auth::user()->img}}">

@@ -158,6 +158,7 @@ Route::group(['prefix' => 'employee', 'middleware' => ['auth', 'employee']], fun
     Route::get("/literatures-show/{id}",[MainController::class,"literatureShow"])->name("literaturesShow");
     Route::get("/tech-support-tickets",[TechSupportTicket::class,"index"])->name("tech-support-ticket-list");
     Route::get("/tech-support-tickets-create",[TechSupportTicket::class,"create"])->name("tech-support-ticket-create");
+    Route::get("/tech-support-tickets-edit/{id}",[TechSupportTicket::class,"edit"])->name("tech-support-ticket-edit");
     Route::post("/tech-support-tickets-store",[TechSupportTicket::class,"store"])->name("tech-support-ticket-store");
     Route::get("/tech-support-tickets-show/{id}",[TechSupportTicket::class,"show"])->name("tech-support-ticket-show");
     Route::delete("/tech-support-tickets-delete/{id}",[TechSupportTicket::class,"delete"])->name("tech-support-ticket-delete");
@@ -180,7 +181,8 @@ Route::group(['prefix' => 'employee', 'middleware' => ['auth', 'employee']], fun
     Route::post("/employee-questionnaire-check",[\App\Http\Controllers\Employee\MainController::class,"checkQuestionnaire"])->name("employee-questionnaire-check");
     Route::get("/employee-questionnaire-result/{id}",[\App\Http\Controllers\Employee\MainController::class,"resultQuestionnaire"])->name("employee-questionnaire-result");
     Route::get("/employee-questionnaire-repass/{id}",[\App\Http\Controllers\Employee\MainController::class,"repassQuestionnaire"])->name("employee-questionnaire-repass");
-
+    Route::get("/employee-notifications",[\App\Http\Controllers\Employee\MainController::class,"notifications"])->name("employee-notifications");
+    Route::get("/employee-notification-show/{id}",[\App\Http\Controllers\Employee\MainController::class,"notification"])->name("employee-notification-show");
 });
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/get-department', [HomeController::class, 'getDepartment']);
@@ -191,17 +193,24 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['middleware' => 'tech-support-director',"prefix"=>"tech-support-director"], function () {
     Route::get('/', [TechSupportDirectorController::class, 'index'])->name('techSupportHome');
+    Route::get('/tickets', [TechSupportDirectorController::class, 'tickets'])->name('techSupportTickets');
+    Route::get('/canban', [TechSupportDirectorController::class, 'canban'])->name('techSupportCanban');
     Route::get("/tech-support-executors",[CTOTechSupportUserController::class,"index"])->name("tech-support-executors");
     Route::resource("/cto-ticket-category",CTOTicketCategoriesController::class);
     Route::resource("/cto-ticket-status",CTOTicketStatusController::class);
     Route::resource("/cto-ticket-deadline",CTOTicketDeadlineController::class);
-    Route::get("/ticket",[CTOTicketController::class,"index"])->name("cto-ticket");
+    Route::get("/ticket/{id}",[CTOTicketController::class,"index"])->name("cto-ticket");
+    Route::get("/profile",[TechSupportDirectorController::class,"profile"])->name("cto-profile");
 });
 
 Route::group(['middleware' => 'tech-support-employee',"prefix"=>"tech-support-employee"], function () {
     Route::get('/', [TechSupportEmployeeController::class, 'index'])->name('techSupportEmployeeHome');
+    Route::get("/profile",[TechSupportEmployeeController::class,"profile"])->name("cto-employee-profile");
     Route::get('/tickets', [TechSupportEmployeeController::class, 'tickets'])->name('techSupportEmployeeTickets');
     Route::get("/take-ticket/{id}",[TechSupportEmployeeController::class, 'take_ticket'])->name("tech-support-employee-ticket-take");
     Route::get("/show-ticket/{id}",[TechSupportEmployeeController::class, 'show_ticket'])->name("tech-support-employee-ticket-show");
     Route::put("/update-ticket/{id}",[TechSupportEmployeeController::class, 'update_ticket'])->name("tech-support-employee-ticket-update");
 });
+
+Route::post('/update-profile', [AuthController::class, 'updateProfile'])->name('userUpdateProfile')->middleware("auth");
+

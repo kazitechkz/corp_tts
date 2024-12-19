@@ -8,13 +8,13 @@ use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
-class TicketExport implements FromCollection,WithMapping,WithHeadings,WithColumnWidths
+
+class TicketExport implements FromCollection, WithMapping, WithHeadings, WithColumnWidths
 {
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public $items;
-
 
     public function __construct($items)
     {
@@ -25,6 +25,7 @@ class TicketExport implements FromCollection,WithMapping,WithHeadings,WithColumn
     {
         return Ticket::whereIn('id', $this->items)->get();
     }
+
     public function headings(): array
     {
         return [
@@ -37,6 +38,13 @@ class TicketExport implements FromCollection,WithMapping,WithHeadings,WithColumn
             'Решен ли вопрос',
             'Дата создания',
             'Дата обновления',
+            'Исполнитель',
+            'Дедлайн',
+            'Статус',
+            'Значение категории',
+            'Переоткрыт ли пользователем',
+            'Взят вовремя',
+            'Рейтинг',
         ];
     }
 
@@ -52,6 +60,13 @@ class TicketExport implements FromCollection,WithMapping,WithHeadings,WithColumn
             'G' => 20,
             'H' => 20,
             'I' => 20,
+            'J' => 30,
+            'K' => 20,
+            'L' => 20,
+            'M' => 40,
+            'N' => 20,
+            'O' => 20,
+            'P' => 20,
         ];
     }
 
@@ -59,14 +74,21 @@ class TicketExport implements FromCollection,WithMapping,WithHeadings,WithColumn
     {
         return [
             $tickets->id,
-            $tickets->category->title,
-            $tickets->user->name . "(" . $tickets->user->email .")",
+            $tickets->category->title ?? 'Не указана',
+            $tickets->user->name . " (" . $tickets->user->email . ")",
             $tickets->title,
-            htmlspecialchars($tickets->description),
+            htmlspecialchars($tickets->description ?? 'Нет описания'),
             $tickets->is_answered ? "Отвечен" : "Не отвечен",
             $tickets->is_resolved ? "Решен" : "Не решен",
             $tickets->created_at->format("d.m.Y H:i"),
             $tickets->updated_at->format("d.m.Y H:i"),
+            $tickets->executor->name ?? 'Не назначен',
+            $tickets->deadline?->title ?? 'Не указан',
+            $tickets->status?->title ?? 'Не указан',
+            $tickets->category_value ?? 'Не указано',
+            $tickets->reopened_by_user ? 'Да' : "Нет",
+            $tickets->at_time ? 'Да' : "Нет",
+            $tickets->rating ?? "-",
         ];
     }
 }

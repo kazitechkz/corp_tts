@@ -16,6 +16,11 @@ class MainController extends Controller
         return view("tech_support_employee.ticket.index");
     }
 
+    public function profile()
+    {
+        return view("tech_support_employee.profile");
+    }
+
     public function tickets()
     {
         return view("tech_support_employee.ticket.index");
@@ -42,14 +47,13 @@ class MainController extends Controller
                 "message"=>"Уважаемый пользователь, ваш тикет № $ticket->id взят в работу, пожалуйста, отслеживайте его в личном кабинете техподдержки",
                 "user_id"=>$ticket->user_id
             ]);
-            return redirect()->route("tech-support-employee-ticket-show",$ticket->id);
+            return redirect()->route("tech-support-employee-ticket-show",["id"=>$ticket->id]);
         }
         return redirect()->back();
     }
     public function show_ticket($id)
     {
-        $ticket = Ticket::
-        where(["executor_id"=>auth()->id(),"id"=>$id])
+        $ticket = Ticket::where(["executor_id"=>auth()->id(),"id"=>$id])
             ->with(["user.department.company","category","deadline","status"])
             ->first();
         if($ticket){

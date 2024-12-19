@@ -1,6 +1,6 @@
 <nav id="sidebar">
     <div class="p-4 pt-5">
-        <a  href="{{route('techSupportHome')}}" class="img logo rounded-circle mb-5" style="background-image: url({{auth()->user()->img}});"></a>
+        <a  href="{{route("cto-profile")}}" class="img logo rounded-circle mb-5" style="background-image: url({{auth()->user()->img}});"></a>
         <div class="menu-title text-center">{{auth()->user()->name}} </div>
         <div class="menu-title text-center mb-3">{{auth()->user()->email}} </div>
         <ul class="metismenu list-unstyled" id="side-menu">
@@ -36,14 +36,14 @@
                 </a>
             </li>
             <li>
-                <a href="{{route('ticket.index')}}" class="{{request()->routeIs('ticket.index') ? 'waves-effect-active' : 'waves-effect'}}">
+                <a href="{{route('techSupportCanban')}}" class="{{request()->routeIs('techSupportCanban') ? 'waves-effect-active' : 'waves-effect'}}">
                     <div class="flex align-items-center">
                         <span><i class="fas fa-comment"></i> Техподдержка </span>
                     </div>
                 </a>
             </li>
             <li>
-                <a href="{{route('ticket-management')}}" class="{{request()->routeIs('ticket-management') ? 'waves-effect-active' : 'waves-effect'}}">
+                <a href="{{route('techSupportTickets')}}" class="{{request()->routeIs('techSupportTickets') ? 'waves-effect-active' : 'waves-effect'}}">
                     <div class="d-inline-block icons-sm mr-1"><i class="fas fa-chart-line"></i></div>
                     <span>Статистика техподдержки</span>
                 </a>

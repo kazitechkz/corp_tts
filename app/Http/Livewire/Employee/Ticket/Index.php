@@ -13,6 +13,7 @@ class Index extends Component
     public $statuses;
     public $date;
     public $loading = true;
+    public $exclude_ended = false;
 
     public function mount()
     {
@@ -22,14 +23,16 @@ class Index extends Component
     public function updatedStatusId($value)
     {
         $this->status_id = $value;
-        // Логика фильтрации может быть вызвана здесь, но это не обязательно,
-        // так как `render` автоматически обновляется
     }
 
     public function updatedDate($value)
     {
         $this->date = $value;
-        // Аналогично, фильтрация может быть вызвана через `render`
+    }
+
+    public function updatedExcludeEnded($value)
+    {
+        $this->exclude_ended = $value;
     }
 
     public function render()
@@ -42,6 +45,11 @@ class Index extends Component
         // Фильтрация по статусу
         if ($this->status_id) {
             $query->where('status_id', $this->status_id);
+        }
+
+        // Фильтрация по статусу
+        if ($this->exclude_ended == true) {
+            $query->where('status_id',"!=",3);
         }
 
         // Фильтрация по дате

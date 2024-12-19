@@ -97,7 +97,7 @@ class MyTicketTable extends DataTableComponent
                 ->sortable(),
             LinkColumn::make('Действия')
                 ->title(fn($row) => 'Ответить')
-                ->location(fn($row) => route('tech-support-employee-ticket-show',$row))
+                ->location(fn($row) => route('tech-support-employee-ticket-show', ['id' => $row]))
                 ->attributes(function($row) {
                     return [
                         'class' => 'bg-blue-500 text-white px-4 py-2 rounded',

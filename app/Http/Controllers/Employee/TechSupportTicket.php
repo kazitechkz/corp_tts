@@ -29,7 +29,8 @@ class TechSupportTicket extends Controller
            $input["user_id"] = auth()->id();
            $input["status_id"] = 1;
            $input["category_value"] = ($ticketCategory = TicketCategory::find($request->get("category_id")))->value;
-           $input["deadline_date"] = Carbon::now()->addHour((TicketDeadline::find($request->get("deadline_id")))->time_limit_hour);
+           $hour = (TicketDeadline::find($request->get("deadline_id")))->time_limit_hour;
+           $input["deadline_date"] = Carbon::now()->addHours($hour);
            $ticket = Ticket::add($input);
            if($request->hasFile("file_url")){
                $ticket = $ticket->uploadFile($request->file("file_url"),"file_url");
@@ -52,12 +53,29 @@ class TechSupportTicket extends Controller
         }
         return redirect()->route("tech-support-ticket-list");
     }
-    public function update($id){
-        $ticket = Ticket::where(["user_id" => auth()->id(),"id"=>$id])->first();
+
+    public function edit($id){
+        $categories = TicketCategory::all();
+        $deadlines = TicketDeadline::all();
+        $ticket = Ticket::where(["user_id" => auth()->id(),"id"=>$id,"status_id"=>1])
+            ->with(["user","executor","status","deadline"])
+            ->first();
         if($ticket){
-           $ticket->edit(["is_resolved"=>true]);
+            return view("employee.tech-support.edit",compact("ticket","categories","deadlines"));
         }
-        return redirect()->back();
+        return redirect()->route("tech-support-ticket-list");
+    }
+
+
+    public function update($id,Request $request){
+        $ticket = Ticket::where(["user_id" => auth()->id(),"id"=>$id,"status_id"=>1])->first();
+        if($ticket){
+            $input = $request->all();
+            $hour = (TicketDeadline::find($request->get("deadline_id")))->time_limit_hour;
+            $input["deadline_date"] = $ticket->created_at->addHours($hour);
+           $ticket->edit($input);
+        }
+        return redirect()->route("tech-support-ticket-show",$id);
     }
 
 

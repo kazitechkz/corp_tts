@@ -20,6 +20,7 @@ use App\Models\Lesson;
 use App\Models\Literature;
 use App\Models\Motive;
 use App\Models\News;
+use App\Models\Notification;
 use App\Models\Questionnaire;
 use App\Models\QuestionnaireQuestion;
 use App\Models\QuestionnaireResult;
@@ -447,6 +448,26 @@ class MainController extends Controller
         }
         toastSuccess("Спасибо за ваше мнение!");
         return redirect()->route("employee-questionnaire-show",$questionnaire_id);
+
+    }
+
+
+    public function notifications()
+    {
+        return view("employee.notification.index");
+    }
+    public function notification($id)
+    {
+        if($notification = Notification::where(["user_id"=>\auth()->id(),"id"=>$id])->first()){
+            if($notification->seen == false){
+                $notification->seen = true;
+                $notification->save();
+            }
+            return view("employee.notification.show",compact("notification"));
+        }
+        else{
+            return redirect()->back();
+        }
 
     }
 }
