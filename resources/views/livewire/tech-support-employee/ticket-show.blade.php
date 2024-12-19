@@ -126,9 +126,9 @@
             </div>
         </div>
     </div>
-    @if($ticket->is_resolved == false)
+    @if($ticket->status_id != 3)
         <div class="lg:flex flex-row items-center rounded-xl bg-white w-full px-4 py-3 h-full">
-            <div class="lg:flex-grow ml-4">
+            <div class="lg:flex-grow">
                 <div class="relative w-full">
                     <div class="my-2 p-3">
                         <label class="block mb-2 text-sm font-medium" for="file_input">Загрузить файл (необязательно)</label>
@@ -141,17 +141,13 @@
                         type="text"
                         class=" w-full border rounded-xl focus:outline-none focus:border-indigo-300"
                     ></textarea>
-                    </section>
-
-                </div>
-            </div>
-            <div class="ml-4">
-                <button
-                    wire:click="addMessage"
-                    class="text-right flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0 my-3"
-                >
-                    <span>Отправить</span>
-                    <span class="ml-2">
+                        <div class="flex justify-end">
+                            <button
+                                wire:click="addMessage"
+                                class="text-right flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 p-2 flex-shrink-0 my-3"
+                            >
+                                <span>Отправить</span>
+                                <span class="ml-2">
                   <svg
                       class="w-4 h-4 transform rotate-45 -mt-px"
                       fill="none"
@@ -167,7 +163,11 @@
                     ></path>
                   </svg>
                 </span>
-                </button>
+                            </button>
+                        </div>
+                    </section>
+
+                </div>
             </div>
         </div>
     @endif

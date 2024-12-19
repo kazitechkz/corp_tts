@@ -47,7 +47,10 @@ class Ticket extends Model
         'is_resolved' => 'bool',
         'deadline_date' => 'datetime',
         'reopen_at' => 'datetime',
-        'is_reopen' => 'bool'
+        'is_reopen' => 'bool',
+        "reopened_by_user" => 'bool',
+        "at_time" => 'bool',
+        "rating"=> 'int'
     ];
 
     protected $fillable = [
@@ -64,7 +67,10 @@ class Ticket extends Model
         'is_reopen',
         'is_answered',
         'is_resolved',
-        'category_value'
+        'category_value',
+        "reopened_by_user",
+        "rating",
+        "at_time"
     ];
 
     // Отношение с категорией тикетов

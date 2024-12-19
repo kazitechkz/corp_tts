@@ -34,6 +34,7 @@ class TechSupportTicket extends Controller
            if($request->hasFile("file_url")){
                $ticket = $ticket->uploadFile($request->file("file_url"),"file_url");
            }
+           toastr()->success("Ваша заявка создана!");
            return redirect()->route("tech-support-ticket-show",$ticket->id);
        }
        catch (\Exception $exception){
@@ -43,7 +44,9 @@ class TechSupportTicket extends Controller
     }
 
     public function show($id){
-        $ticket = Ticket::where(["user_id" => auth()->id(),"id"=>$id])->first();
+        $ticket = Ticket::where(["user_id" => auth()->id(),"id"=>$id])
+            ->with(["user","executor","status","deadline"])
+            ->first();
         if($ticket){
             return view("employee.tech-support.show",compact("ticket"));
         }
@@ -55,5 +58,34 @@ class TechSupportTicket extends Controller
            $ticket->edit(["is_resolved"=>true]);
         }
         return redirect()->back();
+    }
+
+
+    public function updateTicket($id,Request $request){
+        $request->validate([
+            "reopened_by_user"=>"required",
+            "rating"=>"required_if:!reopened_by_user,true|integer|min:1|max:5"
+        ]);
+        $ticket = Ticket::where(["user_id" => auth()->id(),"id"=>$id])->first();
+        if($ticket){
+            if($request->get("reopened_by_user") == true){
+                $ticket->edit(["status_id"=>4]);
+                $ticket->edit(["reopened_by_user"=>true]);
+            }
+            if($request->get("reopened_by_user") == false){
+                $ticket->edit(["rating"=>$request->get("rating")]);
+                $ticket->edit(["reopened_by_user"=>false]);
+            }
+        }
+        return redirect()->back();
+    }
+
+    public function delete($id){
+        $ticket = Ticket::where(["user_id" => auth()->id(),"id"=>$id,"status_id"=>1])->first();
+        if($ticket){
+            $ticket->delete();
+            toastSuccess("Тикет удален");
+        }
+        return redirect()->route("tech-support-ticket-list");
     }
 }

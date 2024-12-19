@@ -11,19 +11,6 @@
                     <span>Главная</span>
                 </a>
             </li>
-            <li>
-                <a href="{{route('techSupportEmployeeTickets')}}" class="{{request()->routeIs('techSupportEmployeeTickets') ? 'waves-effect-active' : 'waves-effect'}}">
-                    <div class="flex align-items-center">
-                        <span><i class="fas fa-comment"></i> Тикеты </span>
-                    </div>
-                </a>
-            </li>
-            <li>
-                <a href="{{route('ticket-management')}}" class="{{request()->routeIs('ticket-management') ? 'waves-effect-active' : 'waves-effect'}}">
-                    <div class="d-inline-block icons-sm mr-1"><i class="fas fa-chart-line"></i></div>
-                    <span>Моя Статистика</span>
-                </a>
-            </li>
             <hr>
             <li>
                 <a href="{{route('logout')}}" class="{{request()->routeIs('logout') ? 'waves-effect-active' : 'waves-effect'}}">

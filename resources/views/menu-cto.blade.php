@@ -13,25 +13,25 @@
             </li>
             <li>
                 <a href="{{route("tech-support-executors")}}" class="{{request()->routeIs("tech-support-executors") ? 'waves-effect-active' : 'waves-effect'}}">
-                    <div class="d-inline-block icons-sm mr-1"><i class="fas fa-user-lock"></i></div>
+                    <div class="d-inline-block icons-sm mr-1"><i class="fas fa-user-shield"></i></div>
                     <span>Распределение для работников тех. поддержки </span>
                 </a>
             </li>
             <li>
                 <a href="{{route('cto-ticket-category.index')}}" class="{{request()->routeIs('cto-ticket-category.index') ? 'waves-effect-active' : 'waves-effect'}}">
-                    <div class="d-inline-block icons-sm mr-1"><i class="fas fa-toolbox"></i></div>
+                    <div class="d-inline-block icons-sm mr-1"><i class="fas fa-boxes"></i></div>
                     <span>Категория техподдержки</span>
                 </a>
             </li>
             <li>
                 <a href="{{route('cto-ticket-status.index')}}" class="{{request()->routeIs('cto-ticket-status.index') ? 'waves-effect-active' : 'waves-effect'}}">
-                    <div class="d-inline-block icons-sm mr-1"><i class="fas fa-toolbox"></i></div>
+                    <div class="d-inline-block icons-sm mr-1"><i class="fas fa-check-circle"></i></div>
                     <span>Статус техподдержки</span>
                 </a>
             </li>
             <li>
                 <a href="{{route('cto-ticket-deadline.index')}}" class="{{request()->routeIs('cto-ticket-status.index') ? 'waves-effect-active' : 'waves-effect'}}">
-                    <div class="d-inline-block icons-sm mr-1"><i class="fas fa-toolbox"></i></div>
+                    <div class="d-inline-block icons-sm mr-1"><i class="fas fa-clock"></i></div>
                     <span>Срок исполнения техподдержки</span>
                 </a>
             </li>

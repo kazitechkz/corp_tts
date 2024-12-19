@@ -160,6 +160,8 @@ Route::group(['prefix' => 'employee', 'middleware' => ['auth', 'employee']], fun
     Route::get("/tech-support-tickets-create",[TechSupportTicket::class,"create"])->name("tech-support-ticket-create");
     Route::post("/tech-support-tickets-store",[TechSupportTicket::class,"store"])->name("tech-support-ticket-store");
     Route::get("/tech-support-tickets-show/{id}",[TechSupportTicket::class,"show"])->name("tech-support-ticket-show");
+    Route::delete("/tech-support-tickets-delete/{id}",[TechSupportTicket::class,"delete"])->name("tech-support-ticket-delete");
+    Route::put("/tech-support-tickets-update-ticket/{id}",[TechSupportTicket::class,"updateTicket"])->name("tech-support-ticket-update-ticket");
     Route::get("/pass-quiz-by-lesson/{id}",[\App\Http\Controllers\Employee\QuizController::class,"passQuiz"])->name("pass-quiz-by-lesson");
     Route::post("/pass-exam",[\App\Http\Controllers\Employee\QuizController::class,"passExam"])->name("pass-exam");
     Route::get("/exam-result/{attempt_id}",[\App\Http\Controllers\Employee\QuizController::class,"examResult"])->name("exam-result");
@@ -202,6 +204,4 @@ Route::group(['middleware' => 'tech-support-employee',"prefix"=>"tech-support-em
     Route::get("/take-ticket/{id}",[TechSupportEmployeeController::class, 'take_ticket'])->name("tech-support-employee-ticket-take");
     Route::get("/show-ticket/{id}",[TechSupportEmployeeController::class, 'show_ticket'])->name("tech-support-employee-ticket-show");
     Route::put("/update-ticket/{id}",[TechSupportEmployeeController::class, 'update_ticket'])->name("tech-support-employee-ticket-update");
-
-
 });
