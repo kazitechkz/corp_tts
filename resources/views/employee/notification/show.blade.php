@@ -26,7 +26,7 @@
             <div class="container">
                 <div class="row mt-5">
                     <div class="col-12 p-3 shadow-lg bg-white rounded-lg">
-                        <p class="text-sm text-gray-600">
+                        <p class="text-sm text-gray-600 min-h-[350px]">
                             {{$notification->message}}
                         </p>
                     </div>

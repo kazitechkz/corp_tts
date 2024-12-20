@@ -117,8 +117,8 @@
                                                     <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{$new_ticket->user->img}}"
                                                          alt="{{$new_ticket->user->name}}">
                                                     @if($new_ticket->executor)
-                                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{$new_ticket->executor->img}}"
-                                                             alt="{{$new_ticket->executor->name}}">
+                                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800 overflow-hidden" src="{{$new_ticket->executor->img}}"
+                                                             >
                                                     @endif
                                                 </div>
 
@@ -240,7 +240,7 @@
                                                          alt="{{$in_work->user->name}}">
                                                     @if($in_work->executor)
                                                         <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{$in_work->executor->img}}"
-                                                             alt="{{$in_work->executor->name}}">
+                                                        >
                                                     @endif
                                                 </div>
 
@@ -362,7 +362,7 @@
                                                          alt="{{$reopened->user->name}}">
                                                     @if($reopened->executor)
                                                         <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{$reopened->executor->img}}"
-                                                             alt="{{$reopened->executor->name}}">
+                                                            >
                                                     @endif
                                                 </div>
 

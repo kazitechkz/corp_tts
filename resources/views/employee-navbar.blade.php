@@ -61,13 +61,6 @@
                                     </a>
                                 </li>
                                 @endhasPermission
-                                @hasPermission('tech-support')
-                                <li class=" d-lg-flex  justify-content-center align-items-center text-center">
-                                    <a class="{{ request()->routeIs('employee-ticket.index') ? 'employee-nav-link-active ' : 'employee-nav-link' }} nav-link text-uppercase text-md font-weight-bold h-full xl:flex align-items-center justify-content-center " href="{{route("employee-ticket.index")}}">
-                                        Управление техподдержкой
-                                    </a>
-                                </li>
-                                @endhasPermission
                             </ul>
                         </div>
                     </li>

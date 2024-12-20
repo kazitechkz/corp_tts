@@ -38,14 +38,14 @@
             <li>
                 <a href="{{route('techSupportCanban')}}" class="{{request()->routeIs('techSupportCanban') ? 'waves-effect-active' : 'waves-effect'}}">
                     <div class="flex align-items-center">
-                        <span><i class="fas fa-comment"></i> Техподдержка </span>
+                        <span><i class="fas fa-comment"></i> Тикеты </span>
                     </div>
                 </a>
             </li>
             <li>
                 <a href="{{route('techSupportTickets')}}" class="{{request()->routeIs('techSupportTickets') ? 'waves-effect-active' : 'waves-effect'}}">
                     <div class="d-inline-block icons-sm mr-1"><i class="fas fa-chart-line"></i></div>
-                    <span>Статистика техподдержки</span>
+                    <span>Отчеты</span>
                 </a>
             </li>
             <hr>

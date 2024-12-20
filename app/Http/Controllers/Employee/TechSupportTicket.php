@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Employee;
 use App\Http\Controllers\Admin\TechSupportCategoryTicket;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Ticket\TicketCreateRequest;
+use App\Models\Notification;
 use App\Models\Ticket;
 use App\Models\TicketCategory;
 use App\Models\TicketDeadline;
@@ -35,6 +36,13 @@ class TechSupportTicket extends Controller
            if($request->hasFile("file_url")){
                $ticket = $ticket->uploadFile($request->file("file_url"),"file_url");
            }
+           Notification::add(
+             [
+                 "topic"=>"Ваша заявка в техническую поддержку создана под номером №$ticket->id",
+                 "user_id"=>auth()->id(),
+                 "message"=>"Пожалуйста, отслеживайте статус в техподдержке"
+             ]
+           );
            toastr()->success("Ваша заявка создана!");
            return redirect()->route("tech-support-ticket-show",$ticket->id);
        }

@@ -24,7 +24,7 @@
             <div class="container mb-5">
                 <div class="row">
                     <div class="col-12 flex align-items-center">
-                        <div class="shadow-2xl rounded-lg p-3 bg-white relative">
+                        <div class="shadow-2xl rounded-lg p-3 bg-white relative w-full">
                             @if($ticket->status_id == 1)
                                 <a href="{{route("tech-support-ticket-edit",$ticket->id)}}" class="text-[#ffa41c] text-lg absolute right-[30px] top-[30px]">
                                     <i class="fas fa-pencil-alt"></i>
