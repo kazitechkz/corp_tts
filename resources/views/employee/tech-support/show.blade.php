@@ -51,7 +51,7 @@
                                             </p>
                                             @if(auth()->user()->department)
                                                 <p class="text-md text-gray-600">
-                                                    <b>Департамент:</b> {{auth()->user()->department}}
+                                                    <b>Департамент:</b> {{$ticket->user->department->title}}
                                                 </p>
                                             @endif
                                             @if(auth()->user()->phone)

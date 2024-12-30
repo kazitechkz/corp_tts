@@ -53,6 +53,15 @@
     <!-- ============================================================== -->
     <div class="container mx-auto relative">
         @yield('content')
+        <!-- Верхняя кнопка -->
+        <div class="fixed top-5 right-5">
+            <a href="{{ route('tech-support-ticket-list') }}">
+                <button class="relative bg-[#ffa41c] w-[80px] h-[80px] text-white p-4 rounded-full shadow-lg hover:bg-[#ffa41c] focus:outline-none focus:ring-2 focus:ring-orange-300">
+                    <i class="fas fa-headset text-2xl"></i>
+                    <span class="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full animate-ping"></span>
+                </button>
+            </a>
+        </div>
         <div class="fixed bottom-5 right-5">
             <a href="{{route("employee-notifications")}}">
             <button class="relative bg-[#ffa41c] text-white p-4 rounded-full shadow-lg hover:bg-[#ffa41c] focus:outline-none focus:ring-2 focus:ring-orange-300">
@@ -97,7 +106,7 @@
                 justify-content-center
                 align-items-center
                 text-center">
-                    <a class="{{ request()->is('tech-support-ticket-list') ? 'employee-nav-link-active' : 'text-white' }} border-[1px] border-white hover:!border-[#f09e32] hover:bg-[#f09e32] nav-link text-uppercase text-md font-weight-bold h-full xl:flex align-items-center justify-content-center" href="{{ route('tech-support-ticket-list') }}">Техподдержка</a>
+                    <a class="{{ request()->is('tech-support-ticket-list') ? 'employee-nav-link-active' : 'text-white' }} border-[1px] border-white hover:!border-[#f09e32] hover:bg-[#f09e32] nav-link text-uppercase text-md font-weight-bold h-full xl:flex align-items-center justify-content-center" href="{{ route('tech-support-ticket-list') }}">ЗАЯВКА В ТЕХПОДЕРЖКУ </a>
                 </li>
 
             </div>

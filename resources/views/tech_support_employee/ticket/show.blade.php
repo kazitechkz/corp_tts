@@ -46,7 +46,7 @@
                                                 </p>
                                                 @if($ticket->user->department)
                                                     <p class="text-md text-gray-600">
-                                                        <b>Департамент:</b> {{$ticket->user->department}}
+                                                        <b>Департамент:</b> {{$ticket->user->department->title}}
                                                     </p>
                                                 @endif
                                                 @if($ticket->user->phone)
